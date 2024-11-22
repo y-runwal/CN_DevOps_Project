@@ -1,0 +1,10 @@
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 112609445401.dkr.ecr.ap-south-1.amazonaws.com/yuvraj_mit/cndevops_project
+
+
+docker tag ecs-docker-webapp:latest 112609445401.dkr.ecr.ap-south-1.amazonaws.com/yuvraj_mit/cndevops_project:latest
+
+
+docker push ecs-docker-webapp 112609445401.dkr.ecr.ap-south-1.amazonaws.com/yuvraj_mit/cndevops_project:latest
+
+
+docker tag ecs-docker-webapp:latest 112609445401.dkr.ecr.ap-south-1.amazonaws.com/yuvraj_mit/cndevops_project:latest
