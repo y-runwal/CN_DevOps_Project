@@ -11,7 +11,7 @@ AWS ECS to create a sample Docker image for running a web application
 
 ## Project Structure:
 ```
-ecs-docker-webapp/
+CN_DevOps_Project/
 ├── app/
 │   └── index.html
 ├── Dockerfile
