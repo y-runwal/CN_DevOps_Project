@@ -29,27 +29,28 @@ ecs-docker-webapp/
 
 1. **Clone the repository:**
 ```
-git clone https://github.com/atulkamble/ecs-docker-webapp.git
-cd ecs-docker-webapp
+git clone https://github.com/y-runwal/CN_DevOps_Project.git
+cd CN_DevOps_Project
 ```
 2. **Build Docker Image:**
 ```
-docker build -t ecs-docker-webapp .
-example: sudo docker build -t atuljkamble/ecs-docker-webapp .
+docker build -t CN_DevOps_Project .
+# Example with a specific tag:
+sudo docker build -t yrunwal/CN_DevOps_Project .
+
 ```
 
 3. **Push to ECR:**
-Create public repo | name-atulkamble >> view push commands
+Create public repo | name-yuvrajrunwal >> view push commands
 ```
 aws ecr get-login-password --region <YOUR_REGION> | docker login --username AWS --password-stdin <YOUR_ECR_URL>
 docker tag ecs-docker-webapp:latest <YOUR_ECR_URL>:latest
 docker push <YOUR_ECR_URL>:latest
 example:
-aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/t2r6c7e4
-// login succeeded
-docker build -t atulkamble .
-docker tag atulkamble:latest public.ecr.aws/t2r6c7e4/atulkamble:latest
-docker push public.ecr.aws/t2r6c7e4/atulkamble:latest
+aws ecr get-login-password --region <YOUR_REGION> | docker login --username AWS --password-stdin <YOUR_ECR_URL>
+docker tag CN_DevOps_Project:latest <YOUR_ECR_URL>:latest
+docker push <YOUR_ECR_URL>:latest
+
 ```
 4. **Create ECS Cluster:**
 Navigate to ECS in the AWS Management Console and create a new ECS cluster (Fargate).
@@ -65,8 +66,7 @@ note down ECSRole, ECSServiceRole ARN, Image URL to update in JSON file
 examples:
 - arn:aws:iam::021891610508:role/ECSRole
 - arn:aws:iam::021891610508:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS
-- public.ecr.aws/t2r6c7e4/atulkamble:latest
-
+- 112609445401.dkr.ecr.ap-south-1.amazonaws.com/yuvraj_mit/cndevops_project
 ```
 {
   "family": "ecs-docker-webapp",
@@ -74,7 +74,7 @@ examples:
   "containerDefinitions": [
     {
       "name": "webapp-container",
-      "image": "public.ecr.aws/t2r6c7e4/atulkamble:latest",
+      "image": "<YOUR_ECR_URL>:latest",
       "essential": true,
       "portMappings": [
         {
@@ -108,5 +108,5 @@ After the service is running, access the application via the Load Balancer’s D
 The application is a simple HTML page served by an Nginx web server.
 
 ## Troubleshoot
-ERROR: Cannot connect to the Docker daemon at unix:///Users/atul/.docker/run/docker.sock. Is the docker daemon running?
+ERROR: Cannot connect to the Docker daemon.... Is the docker daemon running?
 Solution: Make sure docker engine/docker desktop is in running state.
